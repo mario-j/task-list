@@ -15,8 +15,8 @@ export class AppComponent {
   taskItems: TaskItem[] = [];
 
   ngOnInit() {
-    this.taskItemsService.get().subscribe((taskItems: any) => {
-      console.log("ADDADAD", taskItems);
+    this.taskItemsService.getTaskItems().subscribe((taskItems: any) => {
+      console.log("new", taskItems);
       this.taskItems = taskItems;
     });
   }

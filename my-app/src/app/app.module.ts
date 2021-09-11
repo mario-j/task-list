@@ -13,6 +13,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { TaskItemsService } from './services/taskItems.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
+import { InMemTaskItemsService } from './services/inMemTaskItems.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     ReactiveFormsModule,
     ScrollingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemTaskItemsService),
   ],
   providers: [
     TaskItemsService
