@@ -49,14 +49,12 @@ export class AppComponent {
     this.filteredTaskItems = this.taskItems;
   }
   onItemDeSelect(item: any) {
-    console.log("test", this.selectedItems)
     this.filter();
   }
 
   filter() {
     var includeComplete = this.selectedItems.filter(item => item.item_text == 'Complete').length > 0;
     var includeIncomplete = this.selectedItems.filter(item => item.item_text == 'Incomplete').length > 0;
-    console.log("test", includeComplete, includeIncomplete, this.selectedItems);
     if (includeComplete && includeIncomplete)
       this.filteredTaskItems = this.taskItems;
     else if (includeComplete)
