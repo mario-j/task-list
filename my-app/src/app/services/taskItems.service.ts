@@ -18,7 +18,6 @@ export class TaskItemsService {
   constructor(private http:HttpClient) {}
 
   getTaskItems(): Observable<TaskItem[]> {
-    console.log("est");
     return this.http.get<TaskItem[]>(this.taskItemsUrl).pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
@@ -28,9 +27,18 @@ export class TaskItemsService {
     );
   }
 
-  // get() {
-  //
-  //   let params = new HttpParams().set('item', item);
-  //   return this.http.get('http://localhost:3000/api/search', { params: params });
-  // }
+  createTaskItem(taskItem: TaskItem): Observable<TaskItem> {
+    taskItem.id = null;
+    return this.http.post<TaskItem>(this.taskItemsUrl, taskItem).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return _throw(error);
+      })
+    )
+  }
+
+  deleteTaskItem(taskItem: TaskItem): Observable<any> {
+    const id = taskItem.id;
+    return this.http.delete(this.taskItemsUrl + id);
+  }
 }

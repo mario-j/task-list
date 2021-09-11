@@ -13,13 +13,34 @@ export class AppComponent {
   constructor(private taskItemsService: TaskItemsService) { }
 
   taskItems: TaskItem[] = [];
+  description = '';
 
   ngOnInit() {
-    this.taskItemsService.getTaskItems().subscribe((taskItems: any) => {
-      console.log("new", taskItems);
-      this.taskItems = taskItems;
+    this.getTaskItems();
+  }
+
+  createTaskItem() {
+    var inputEl = <HTMLInputElement>document.getElementById('description');
+    var taskItem = new TaskItem();
+    taskItem.id = null;
+    taskItem.description = inputEl.value;
+    this.taskItemsService.createTaskItem(taskItem).subscribe(response => {
+      console.log(response)
+      this.getTaskItems();
     });
   }
+
+  getTaskItems() {
+      this.taskItemsService.getTaskItems().subscribe((taskItems: any) => {
+        this.taskItems = taskItems;
+      });
+  }
+
+  deleteTaskItem(taskItem: TaskItem) {
+    this.taskItemsService.deleteTaskItem(taskItem).subscribe(taskItem => console.log(taskItem));
+    this.getTaskItems();
+  }
+
 
   title = 'Task List';
 

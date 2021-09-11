@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { TaskItemsService } from './services/taskItems.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import {MatIconModule} from '@angular/material/icon';
 
 import { InMemTaskItemsService } from './services/inMemTaskItems.service';
 
@@ -30,6 +31,7 @@ import { InMemTaskItemsService } from './services/inMemTaskItems.service';
     MatFormFieldModule,
     MatSelectModule,
     MatCardModule,
+    MatIconModule,
     ReactiveFormsModule,
     ScrollingModule,
     HttpClientModule,

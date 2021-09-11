@@ -1,4 +1,4 @@
 export class TaskItem {
-    id: number = 0;
+    id: number | null = 0;
     description: string = '';
 }

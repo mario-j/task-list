@@ -59,3 +59,8 @@
 .center {
   text-align:center;
 }
+
+.icon-button {
+  cursor:pointer;
+  margin:4px;
+}
