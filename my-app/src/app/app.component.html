@@ -8,12 +8,12 @@
 
     <mat-card style="margin:20px">
       <div class="row col-sm-12 col-md-12 col-lg-12">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <mat-form-field class="col-sm-9 col-md-9 col-lg-9" appearance="outline">
-            <mat-label>Task List Item</mat-label>
-            <input matInput type="text" class="form-control" placeholder="Description">
-          </mat-form-field>
-          <button mat-flat-button class="add-button" color="primary">Add</button>
+        <mat-form-field class="col-sm-12 col-md-12 col-lg-12" appearance="outline">
+          <mat-label>Task List Item</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Description">
+        </mat-form-field>
+        <div class="center">
+          <button mat-flat-button color="primary">Add</button>
         </div>
         <div *ngIf="taskItems.length == 0" class="empty-message">No items</div>
         <div *ngIf="taskItems.length > 0" style="max-height: 400px; overflow:auto">

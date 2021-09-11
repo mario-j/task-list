@@ -52,10 +52,10 @@
   margin: auto;
 }
 
-.mat-button {
-  display:'inline-block';
-  padding:3px;
-}
 .mat-primary {
     background-color:'#177fff';
+}
+
+.center {
+  text-align:center;
 }
