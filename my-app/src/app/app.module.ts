@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { TaskItemsService } from './services/taskItems.service';
 import { InMemTaskItemsService } from './services/inMemTaskItems.service';
@@ -39,9 +41,12 @@ import { EditTaskItemDialogComponent } from './edit-task-item-dialog/edit-task-i
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
     ScrollingModule,
     HttpClientModule,
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     HttpClientInMemoryWebApiModule.forRoot(InMemTaskItemsService),
   ],
   providers: [

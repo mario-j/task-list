@@ -26,6 +26,7 @@
     "csv-parser": "^3.0.0",
     "forever": "^4.0.1",
     "jquery": "^3.6.0",
+    "ng-multiselect-dropdown": "^0.3.4",
     "ngx-bootstrap": "^7.0.0",
     "papaparse": "^5.3.1",
     "popper.js": "^1.16.1",

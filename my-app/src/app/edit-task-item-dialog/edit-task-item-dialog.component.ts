@@ -33,15 +33,16 @@ export class EditTaskItemDialogComponent implements OnInit {
     var taskItem = new TaskItem();
     taskItem.id = this.data.id
     taskItem.description = inputEl.value;
+    taskItem.isComplete = this.data.isComplete
     this.dialogRef.close(taskItem);
   }
 
   setIsValid(event: any) {
-    var description = event.target.value;
-    if (description.length == 0) {
-      this.isValid = false;
-    } else {
+    var inputEl = <HTMLInputElement>document.getElementById('description');
+    if (event.target.value.length > 0) {
       this.isValid = true;
+    } else {
+      this.isValid = false;
     }
   }
 

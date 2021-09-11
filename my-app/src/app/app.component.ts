@@ -6,6 +6,7 @@ import { TaskItemsService } from './services/taskItems.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import { EditTaskItemDialogComponent } from './edit-task-item-dialog/edit-task-item-dialog.component';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,54 @@ export class AppComponent {
     private dialog: MatDialog) { }
 
   taskItems: TaskItem[] = [];
+  filteredTaskItems: TaskItem[] = [];
   description = '';
   isValid = false;
 
+  dropdownList: any[] = [];
+  selectedItems: any[] = [];
+  dropdownSettings:IDropdownSettings = {};
+
   ngOnInit() {
     this.getTaskItems();
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Complete' },
+      { item_id: 2, item_text: 'Incomplete' }
+    ];
+    this.selectedItems = [
+
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      itemsShowLimit: 3
+    };
+  }
+
+  onItemSelect(item: any) {
+    this.filter();
+  }
+  onSelectAll(items: any) {
+    this.filteredTaskItems = this.taskItems;
+  }
+  onItemDeSelect(item: any) {
+    console.log("test", this.selectedItems)
+    this.filter();
+  }
+
+  filter() {
+    var includeComplete = this.selectedItems.filter(item => item.item_text == 'Complete').length > 0;
+    var includeIncomplete = this.selectedItems.filter(item => item.item_text == 'Incomplete').length > 0;
+    console.log("test", includeComplete, includeIncomplete, this.selectedItems);
+    if (includeComplete && includeIncomplete)
+      this.filteredTaskItems = this.taskItems;
+    else if (includeComplete)
+      this.filteredTaskItems = this.taskItems.filter((item: any) => item.isComplete == true);
+    else if (includeIncomplete)
+      this.filteredTaskItems = this.taskItems.filter((item: any) => item.isComplete == false);
+    else
+      this.filteredTaskItems = this.taskItems;
   }
 
   createTaskItem() {
@@ -47,6 +91,7 @@ export class AppComponent {
   getTaskItems() {
       this.taskItemsService.getTaskItems().subscribe((taskItems: any) => {
         this.taskItems = taskItems;
+        this.filteredTaskItems = taskItems;
       });
   }
 
@@ -58,14 +103,22 @@ export class AppComponent {
   editTaskItem(taskItem: TaskItem) {
     const dialogRef = this.dialog.open(EditTaskItemDialogComponent, {
       width: 'max(30vw, 300px)',
-      data: {id: taskItem.id, description: taskItem.description}
+      data: {id: taskItem.id, description: taskItem.description, isComplete: taskItem.isComplete}
     });
 
     dialogRef.afterClosed().subscribe(taskItem => {
-      console.log('The dialog was closed', taskItem);
-      this.taskItemsService.updateTaskItem(taskItem).subscribe(response => this.openSnackBar('Item updated successfully', 'Cancel'));
-      this.getTaskItems()
+      if (taskItem) {
+        console.log('The dialog was closed', taskItem);
+        this.taskItemsService.updateTaskItem(taskItem).subscribe(response => this.openSnackBar('Item updated successfully', 'Cancel'));
+        this.getTaskItems()
+      }
     });
+  }
+
+  toggleCompletion(taskItem: TaskItem) {
+    taskItem.isComplete = !taskItem.isComplete;
+    this.taskItemsService.updateTaskItem(taskItem).subscribe(response => this.openSnackBar('Completion status updated successfully', 'Cancel'));
+    this.getTaskItems();
   }
 
   clearForm() {
@@ -80,11 +133,11 @@ export class AppComponent {
   }
 
   setIsValid(event: any) {
-    var description = event.target.value;
-    if (description.length == 0) {
-      this.isValid = false;
-    } else {
+    var inputEl = <HTMLInputElement>document.getElementById('description');
+    if (event.target.length > 0) {
       this.isValid = true;
+    } else {
+      this.isValid = false;
     }
   }
 
