@@ -41,4 +41,8 @@ export class TaskItemsService {
     const id = taskItem.id;
     return this.http.delete(this.taskItemsUrl + id);
   }
+
+  updateTaskItem(taskItem: TaskItem): Observable<any> {
+     return this.http.put(this.taskItemsUrl + taskItem.id, taskItem);
+  }
 }

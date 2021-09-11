@@ -4,6 +4,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { TaskItem } from './models/taskItem.model';
 import { TaskItemsService } from './services/taskItems.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import { EditTaskItemDialogComponent } from './edit-task-item-dialog/edit-task-item-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +13,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private taskItemsService: TaskItemsService, private snackBar: MatSnackBar) { }
+  constructor(
+    private taskItemsService: TaskItemsService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog) { }
 
   taskItems: TaskItem[] = [];
   description = '';
+  isValid = false;
 
   ngOnInit() {
     this.getTaskItems();
@@ -49,13 +55,37 @@ export class AppComponent {
     this.getTaskItems();
   }
 
+  editTaskItem(taskItem: TaskItem) {
+    const dialogRef = this.dialog.open(EditTaskItemDialogComponent, {
+      width: 'max(30vw, 300px)',
+      data: {id: taskItem.id, description: taskItem.description}
+    });
+
+    dialogRef.afterClosed().subscribe(taskItem => {
+      console.log('The dialog was closed', taskItem);
+      this.taskItemsService.updateTaskItem(taskItem).subscribe(response => this.openSnackBar('Item updated successfully', 'Cancel'));
+      this.getTaskItems()
+    });
+  }
+
   clearForm() {
     var inputEl = <HTMLInputElement>document.getElementById('description');
     inputEl.value = '';
   }
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
+    this.snackBar.open(message, action, {
+      duration: 3000
+    });
+  }
+
+  setIsValid(event: any) {
+    var description = event.target.value;
+    if (description.length == 0) {
+      this.isValid = false;
+    } else {
+      this.isValid = true;
+    }
   }
 
 
