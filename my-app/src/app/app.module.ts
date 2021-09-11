@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FormControl, FormGroupDirective, FormsModule, NgForm, Validators, ReactiveFormsModule, FormGroup,} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -32,6 +33,7 @@ import { InMemTaskItemsService } from './services/inMemTaskItems.service';
     MatSelectModule,
     MatCardModule,
     MatIconModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     ScrollingModule,
     HttpClientModule,
