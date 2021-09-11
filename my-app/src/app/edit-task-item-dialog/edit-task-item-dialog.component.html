@@ -4,7 +4,7 @@
     <input matInput id="dialogDescription" type="text" class="form-control" placeholder="Description" (keyup)="setIsValid($event)" />
   </mat-form-field>
   <div class="right">
-    <button mat-flat-button color="primary" [disabled]="isValid" (click)="updateTaskItem()">Save</button>
     <button mat-flat-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" [disabled]="!isValid" (click)="updateTaskItem()">Save</button>
   </div>
 </div>

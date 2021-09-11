@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TaskItemsService } from './services/taskItems.service';
 import { InMemTaskItemsService } from './services/inMemTaskItems.service';
@@ -46,6 +47,7 @@ import { EditTaskItemDialogComponent } from './edit-task-item-dialog/edit-task-i
     ScrollingModule,
     HttpClientModule,
     FormsModule,
+    NgxSkeletonLoaderModule,
     NgMultiSelectDropDownModule.forRoot(),
     HttpClientInMemoryWebApiModule.forRoot(InMemTaskItemsService),
   ],

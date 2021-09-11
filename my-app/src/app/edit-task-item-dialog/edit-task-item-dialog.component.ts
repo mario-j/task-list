@@ -11,8 +11,8 @@ export class EditTaskItemDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditTaskItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    isValid = false;
+    
+    isValid = true;
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -1,8 +1,7 @@
 .mat-primary {
-    background-color:'#177fff';
+    background-color:'#337ab7';
 }
 
 .right {
-  float:right;
-  margin:15px;
+  text-align:right;
 }

@@ -34,9 +34,6 @@ export class AppComponent {
       { item_id: 1, item_text: 'Complete' },
       { item_id: 2, item_text: 'Incomplete' }
     ];
-    this.selectedItems = [
-
-    ];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -91,7 +88,7 @@ export class AppComponent {
   getTaskItems() {
       this.taskItemsService.getTaskItems().subscribe((taskItems: any) => {
         this.taskItems = taskItems;
-        this.filteredTaskItems = taskItems;
+        this.filter();
       });
   }
 
@@ -134,7 +131,7 @@ export class AppComponent {
 
   setIsValid(event: any) {
     var inputEl = <HTMLInputElement>document.getElementById('description');
-    if (event.target.length > 0) {
+    if (event.target.value.length > 0) {
       this.isValid = true;
     } else {
       this.isValid = false;
