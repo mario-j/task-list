@@ -2,30 +2,41 @@
   <span style="padding:5px">Task List</span>
 </div>
 
-<div class="row col-sm-12 col-md-12 col-lg-12">
-  <div class="offset-sm-3 offset-md-3 offset-lg-3 col-sm-6 col-md-6 col-lg-6">
-
-
+<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin:0">
+  <div class="offset-sm-3 offset-md-3 offset-lg-3 col-xs-12 col-sm-6 col-md-6 col-lg-6">
     <mat-card style="margin:20px">
-      <div class="row col-sm-12 col-md-12 col-lg-12">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <mat-form-field class="col-sm-9 col-md-9 col-lg-9" appearance="outline">
-            <mat-label>Task List Item</mat-label>
-            <input matInput type="text" class="form-control" placeholder="Description">
-          </mat-form-field>
-          <button mat-flat-button class="add-button" color="primary">Add</button>
-        </div>
+      <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin:0">
+        <mat-form-field class="col-xs-6 col-sm-6 col-md-6 col-lg-6" appearance="outline">
+          <mat-label>Task List Item</mat-label>
+          <input matInput id="description" type="text" class="form-control" placeholder="Description" (keyup)="setIsValid($event)" />
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 add-button" (click)="createTaskItem()" [disabled]="!isValid">Add</button>
+        <br />
+        <ng-multiselect-dropdown
+          [placeholder]="'Filters'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          [(ngModel)]="selectedItems"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelect)="onItemDeSelect($event)"
+        >
+        </ng-multiselect-dropdown>
         <div *ngIf="taskItems.length == 0" class="empty-message">No items</div>
         <div *ngIf="taskItems.length > 0" style="max-height: 400px; overflow:auto">
 
-          <div *ngFor="let item of taskItems" class="item-row row col-sm-12 col-md-12 col-lg-12">
+        <div *ngFor="let item of filteredTaskItems" class="item-row row" style="margin:0">
           <div class="col-sm-6 col-md-6 col-lg-6">
+            <mat-checkbox [checked]="item.isComplete" (change)="toggleCompletion(item)" style="margin:4px;line-height:100%"></mat-checkbox>
             <span class=row-subheader>{{item.description}}</span>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-6 row-subheader" style="text-align:right; margin:auto">
-            Edit/Delete
+            <mat-icon class="icon-button" aria-hidden="false" aria-label="Example edit icon" (click)="editTaskItem(item)">edit</mat-icon>
+            <mat-icon class="icon-button" aria-hidden="false" aria-label="Example delete icon" (click)="deleteTaskItem(item)">delete</mat-icon>
           </div>
         </div>
+
+
       </div>
     </div>
   </mat-card>

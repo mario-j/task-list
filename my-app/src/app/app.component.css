@@ -18,7 +18,7 @@
   width: 100vw;
   display: flex;
   align-items: center;
-  background-color: #177fff;
+  background-color: #337ab7;
   color: white;
   font-weight: 600;
   font-size: 24px;
@@ -52,10 +52,31 @@
   margin: auto;
 }
 
-.mat-button {
-  display:'inline-block';
-  padding:3px;
-}
 .mat-primary {
-    background-color:'#177fff';
+    background-color:'#337ab7';
 }
+
+.add-button {
+  display:inline-block;
+  float:left;
+  margin-top: 4px;
+  height: 50px;
+}
+
+.center {
+  text-align:center;
+}
+
+.icon-button {
+  cursor:pointer;
+  margin:4px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #337ab7!important;
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #337ab7;
+  }
