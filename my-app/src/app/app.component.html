@@ -2,15 +2,15 @@
   <span style="padding:5px">Task List</span>
 </div>
 
-<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin:0">
+<div class="row col-sm-12 col-md-12 col-lg-12" style="margin:0">
   <div class="offset-sm-3 offset-md-3 offset-lg-3 col-xs-12 col-sm-6 col-md-6 col-lg-6">
     <mat-card style="margin:20px">
-      <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin:0">
-        <mat-form-field class="col-xs-6 col-sm-6 col-md-6 col-lg-6" appearance="outline">
+      <div class="row col-sm-12 col-md-12 col-lg-12" style="margin:0">
+        <mat-form-field class="col-sm-8 col-md-8 col-lg-8" appearance="outline" style="margin-bottom:0px">
           <mat-label>Task List Item</mat-label>
           <input matInput id="description" type="text" class="form-control" placeholder="Description" (keyup)="setIsValid($event)" />
         </mat-form-field>
-        <button mat-flat-button color="primary" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 add-button" (click)="createTaskItem()" [disabled]="!isValid">Add</button>
+        <button mat-flat-button color="primary" class="col-sm-4 col-md-4 col-lg-4 add-button" (click)="createTaskItem()" [disabled]="!isValid">Add</button>
         <br />
         <ng-multiselect-dropdown
           [placeholder]="'Filters'"
@@ -22,8 +22,8 @@
           (onDeSelect)="onItemDeSelect($event)"
         >
         </ng-multiselect-dropdown>
-        <div *ngIf="taskItems.length == 0" class="empty-message">No items</div>
-        <div *ngIf="taskItems.length > 0" style="max-height: 400px; overflow:auto">
+        <div *ngIf="filteredTaskItems.length == 0" class="empty-message">No items</div>
+        <div *ngIf="filteredTaskItems.length > 0" style="max-height: 400px; overflow:auto">
 
         <div *ngFor="let item of filteredTaskItems" class="item-row row" style="margin:0">
           <div class="col-sm-6 col-md-6 col-lg-6">

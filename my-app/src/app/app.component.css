@@ -60,6 +60,7 @@
   display:inline-block;
   float:left;
   margin-top: 4px;
+  margin-bottom:10px;
   height: 50px;
 }
 
@@ -80,3 +81,8 @@
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #337ab7;
   }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: .25em 0;
+    padding: 0;
+}
