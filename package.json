@@ -11,7 +11,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd my-app && npm start"
+    "start": "cd my-app && npm start",
+    "heroku-postbuild": "cd my-app && ng build" 
   },
   "repository": {
     "type": "git",
