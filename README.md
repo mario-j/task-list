@@ -6,7 +6,7 @@ A task list built using Node and Angular to allow basic CRUD operations. Live si
 
 Clone this repository using the ```git clone https://github.com/mario-j/task-list.git``` command in your terminal.
 
-Navigate to the my-app directory using ```cd task-list/my-app```.
+Navigate to the my-app directory using ```cd task-list```.
 
 Install dependencies using ```npm install``` and build the Angular app using ```ng build```.
 
